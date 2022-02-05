@@ -1,13 +1,9 @@
-# guille_trucker
+# forked off from guille_trucker
 
-The best trucker script
 
 ## Installation
+Query the included sql to ensure the script
 
-Upload dtb.sql and ensure the script
-
-## Contact me
-[DISCORD](https://discord.gg/eBpmkW6e5j)
 
 ## License
 GNU General Public License v3.0
