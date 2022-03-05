@@ -69,7 +69,7 @@ function startJob()
 
         if dist < 3 then
             wait = 0
-            ShowFloatingHelpNotification('Press ~r~E~w~ to speak with the trucker', Config.pedCoords + vector3(0,0,0+2))
+            ShowFloatingHelpNotification('Press ~r~E~w~ to speak with the Fuel trucker', Config.pedCoords + vector3(0,0,0+2))
             if IsControlJustPressed(1, 38) then
                 getMenu()
                 s = false
@@ -92,7 +92,7 @@ function getMenu()
         end
 
         ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'get_routes', {
-            title = ('Rutas'),
+            title = ('Routes'),
             align = 'top-right',
             elements = elements
         }, function(data, menu)
@@ -152,7 +152,7 @@ function startRoute(name, money, points)
     TaskVehicleDriveToCoordLongrange(cped, vehicle, Config.deliverCoords, 30.0, 319, 5.0)
     Citizen.Wait(Config.arriveTime)
     TaskLeaveAnyVehicle(cped, true, true)
-    ESX.ShowNotification('The boss has left the truck for you, go pick it up and start the route ' ..name)
+    ESX.ShowNotification('The driver has left the truck for you, go pick it up and start the route ' ..name)
 
     TaskGoToCoordAnyMeans(cped, Config.byeCoords, 0.2, 0, 0, 786603, 0xbf800000)
     
@@ -208,7 +208,7 @@ function routeStartNow(name, money, points, vehicle)
                 print("yes")
                 wait = 0
                 DrawMarker(1, selectedroute[done]['x'], selectedroute[done]['y'], selectedroute[done]['z']-0.95, 0, 0, 0, 0, 0, 0, 5.0000, 5.0000, 0.6001,255,0,0, 200, 0, 0, 0, 0)
-                ShowFloatingHelpNotification('Press ~r~E~w~ to deliver the ware', vector3(selectedroute[done]['x'], selectedroute[done]['y'], selectedroute[done]['z']))
+                ShowFloatingHelpNotification('Press ~r~E~w~ to dump the fuel', vector3(selectedroute[done]['x'], selectedroute[done]['y'], selectedroute[done]['z']))
                 if dist < 10 and IsVehicleAttachedToTrailer(vehicle)  then
                     if IsControlJustPressed(1, 38) then
                         
@@ -315,7 +315,7 @@ AddEventHandler('guille_trucker:getRout', function()
         end
 
         ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'get_routes', {
-            title = ('Rutas'),
+            title = ('Routes'),
             align = 'top-right',
             elements = elements
         }, function(data, menu)
@@ -354,9 +354,9 @@ AddEventHandler('guille_trucker:createroute', function(name, points)
 end)
 
 --TriggerEvent("chat:addSuggestion", "/createroute", ("Crear una ruta para el trabajo de camionero"), {{name = ("Nombre"), help = ("Nombre de la ruta que se va a crear (sólo una palabra)")}, {name = ("Sueldo"), help = ("Dinero que se va a cobrar al hacer la ruta")}})
-TriggerEvent("chat:addSuggestion", "/addroute", ("Create a route for trucker work"), {{name = ("Points"), help = ("Points of the route to be created (numbers only)")}, {name = ("Name"), help = ("Name of the path to create (just one word)")}, {name = ("Money"), help = ("Money that will be charged when doing the route")}})
-TriggerEvent("chat:addSuggestion", "/seeroutes", ("See created trucker routes"), {})
-TriggerEvent("chat:addSuggestion", "/deleteroute", ("Delete a route for trucker work"), {{name = ("Name"), help = ("Name of the route to be deleted, check the names with / seeroutes")}})
+TriggerEvent("chat:addSuggestion", "/addroute", ("Create a route for fuel delivery"), {{name = ("Points"), help = ("Points of the route to be created (numbers only)")}, {name = ("Name"), help = ("Name of the path to create (just one word)")}, {name = ("Money"), help = ("Money that will be charged when doing the route")}})
+TriggerEvent("chat:addSuggestion", "/seeroutes", ("See created fuel delivery routes"), {})
+TriggerEvent("chat:addSuggestion", "/deleteroute", ("Delete a route for fuel delivery"), {{name = ("Name"), help = ("Name of the route to be deleted, check the names with / seeroutes")}})
 
 -- Fin Events
 

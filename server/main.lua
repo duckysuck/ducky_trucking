@@ -17,7 +17,7 @@ local maxmoney = 1000000  --Change the max money that a trucker can earn on one 
         else
             print(name)
             print(money)
-            MySQL.Async.execute('INSERT INTO truckerroutes (name, coords, money) VALUES (@name, @coords, @money)', {
+            exports.oxmysql:update('INSERT INTO truckerroutes (name, coords, money) VALUES (@name, @coords, @money)', {
                 ['@name'] = name,
                 ['@coords'] = json.encode(xPlayer.getCoords()),
                 ['@money'] = money,
@@ -72,7 +72,7 @@ RegisterCommand('addroute', function(source, args)
         if type(points) == 'number' then
                 if type(name) == 'string' then
                     if type(money) == 'number' then
-                        MySQL.Async.execute('INSERT INTO truckroutes (points, titulo, owner, money) VALUES (@points, @titulo, @owner, @money)', {
+                        exports.oxmysql:update('INSERT INTO truckroutes (points, titulo, owner, money) VALUES (@points, @titulo, @owner, @money)', {
                             ['@points'] = points,
                             ['@titulo'] = name,
                             ['@owner'] = xPlayer.getIdentifier(),
@@ -111,10 +111,10 @@ RegisterCommand('deleteroute', function(source, args)
     local xPlayer = ESX.GetPlayerFromId(source)
     local name = args[1]
     if xPlayer.getGroup() == 'admin' then
-        MySQL.Async.execute('DELETE FROM truckroutes WHERE titulo = @titulo', {
+        exports.oxmysql:update('DELETE FROM truckroutes WHERE titulo = @titulo', {
             ['@titulo'] = name   
         })
-        MySQL.Async.execute('DELETE FROM truckerroutes WHERE name = @name', {
+        exports.oxmysql:update('DELETE FROM truckerroutes WHERE name = @name', {
             ['@name'] = name   
         })
         TriggerClientEvent('esx:showNotification', xPlayer.source, 'You deleted the route ' ..name)
@@ -154,7 +154,7 @@ AddEventHandler('guille_trucker:addpointtoroute', function(name, point)
     local xPlayer = ESX.GetPlayerFromId(source)
     local position = xPlayer.getCoords()
     if xPlayer.getGroup() == 'admin' then
-        MySQL.Async.execute('INSERT INTO truckerroutes (name, coords, point) VALUES (@name, @coords, @point)', {
+        exports.oxmysql:update('INSERT INTO truckerroutes (name, coords, point) VALUES (@name, @coords, @point)', {
             ['@name'] = name,
             ['@coords'] = json.encode(position),
             ['@point'] = point,
